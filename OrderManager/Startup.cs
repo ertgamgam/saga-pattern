@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OrderManager.EventPublisher;
 using OrderManager.Repository;
 
 
@@ -29,7 +30,7 @@ namespace OrderManager
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen().AddSingleton<IOrderEventPublisher, OrderEventPublisher>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

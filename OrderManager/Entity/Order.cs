@@ -6,9 +6,8 @@ namespace OrderManager.Entity
 {
     public class Order
     {
-        [JsonIgnore]
         // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

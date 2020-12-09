@@ -7,7 +7,7 @@ namespace OrderService
 {
     class Program
     {
-        private const string KafkaHost = "localhost:9092";
+        private const string KafkaHost = "";
         private const string OrderCreatedTopic = "order-created";
 
         static async Task Main(string[] args)

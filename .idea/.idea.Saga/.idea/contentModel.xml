@@ -12,6 +12,10 @@
         <e p="Entity" t="Include">
           <e p="Order.cs" t="Include" />
         </e>
+        <e p="EventPublisher" t="Include">
+          <e p="IOrderEventPublisher.cs" t="Include" />
+          <e p="OrderEventPublisher.cs" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
