@@ -36,3 +36,4 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+OrderManager/obj/Debug/netcoreapp3.1/OrderManager.csprojAssemblyReference.cache
