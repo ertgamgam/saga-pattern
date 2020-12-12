@@ -1,6 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace OrderManager.Entity
 {
@@ -8,9 +6,16 @@ namespace OrderManager.Entity
     {
         // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
         public string Name { get; set; }
-
+        public int UserId { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.Accepted;
+        public IEnumerable<ItemDto> Items { get; set; }
+    }
+
+    public class ItemDto
+    {
+        public int Id { get; set; }
+        public int Quantity { get; set; }
+        public double Price { get; set; }
     }
 }
