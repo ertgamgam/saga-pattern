@@ -8,7 +8,7 @@ namespace Wallet
     public static class KafkaConsumerExtension
     {
         private const string OrderStockUpdatedTopicName = "order-stock-updated";
-        private const string GroupId = "stock-service";
+        private const string GroupId = "wallet-service";
 
         public static IServiceCollection AddConsumers(this IServiceCollection services)
         {
