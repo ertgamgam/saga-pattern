@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 
-namespace Wallet.Consumer.OrderStockUpdated
+namespace Stock.Consumer.OrderWalletPayError
 {
     public class OrderWalletPayErrorMessage
     {
         public int OrderId { get; set; }
-        public WalletError WalletError { get; set; }
         public IEnumerable<ProductDto> Products { get; set; }
     }
 

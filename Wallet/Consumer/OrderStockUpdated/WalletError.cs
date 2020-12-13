@@ -1,4 +1,4 @@
-namespace Wallet.Consumer
+namespace Wallet.Consumer.OrderStockUpdated
 {
     public enum WalletError
     {

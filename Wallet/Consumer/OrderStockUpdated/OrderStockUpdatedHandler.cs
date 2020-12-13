@@ -39,6 +39,7 @@ namespace Wallet.Consumer.OrderStockUpdated
                 var orderWalletPayErrorMessage = new OrderWalletPayErrorMessage
                 {
                     OrderId = message.OrderId,
+                    WalletError = WalletError.InsufficientBalance,
                     Products = message.Products.Select(x => new ProductDto
                         {ProductId = x.ProductId, Quantity = x.Quantity})
                 };
