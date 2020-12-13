@@ -12,9 +12,10 @@ namespace OrderManager.Consumer.OrderStockError
         private readonly OrderDbContext _dbContext;
         private readonly ILogger<OrderStockErrorHandler> _logger;
 
-        public OrderStockErrorHandler(OrderDbContext dbContext)
+        public OrderStockErrorHandler(OrderDbContext dbContext, ILogger<OrderStockErrorHandler> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         public async Task Handle(OrderStockUpdateErrorMessage message)
