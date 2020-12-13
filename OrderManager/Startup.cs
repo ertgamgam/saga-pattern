@@ -24,6 +24,7 @@ namespace OrderManager
             services.AddDbContext<OrderDbContext>(opt => opt.UseInMemoryDatabase("Order"))
                 .AddControllers();
 
+            services.AddConsumers();
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
