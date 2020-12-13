@@ -19,7 +19,7 @@ namespace Wallet.Controller
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var wallets = await _dbContext.Products.ToListAsync();
+            var wallets = await _dbContext.Wallets.ToListAsync();
             return Ok(new {Wallets = wallets});
         }
     }

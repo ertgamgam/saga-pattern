@@ -9,6 +9,6 @@ namespace Wallet.Repository
         {
         }
 
-        public DbSet<Entity.Wallet> Products { get; set; }
+        public DbSet<Entity.Wallet> Wallets { get; set; }
     }
 }

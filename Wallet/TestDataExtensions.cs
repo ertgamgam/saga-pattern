@@ -8,7 +8,7 @@ namespace Wallet
         public static IServiceCollection AddTestWallet(this IServiceCollection services)
         {
             var stockDbContext = services.BuildServiceProvider().GetRequiredService<WalletDbContext>();
-            stockDbContext.Products.AddRange(
+            stockDbContext.Wallets.AddRange(
                 new Entity.Wallet {UserId = 333, Balance = 3000},
                 new Entity.Wallet {UserId = 444, Balance = 5}
             );

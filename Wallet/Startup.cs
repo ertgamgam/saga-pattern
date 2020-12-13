@@ -29,7 +29,9 @@ namespace Wallet
                     KafkaHost = Configuration.GetValue<string>("KafkaHost"),
                 }));
 
-            services.AddTestWallet();
+            services.AddTestWallet()
+                .AddConsumers()
+                .AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
