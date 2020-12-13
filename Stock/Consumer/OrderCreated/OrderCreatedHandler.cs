@@ -78,7 +78,12 @@ namespace Stock.Consumer.OrderCreated
                 OrderId = message.Id,
                 OrderName = message.Name,
                 UserId = message.UserId,
-                Products = dbProducts
+                Products = dbProducts.Select(x => new ProductPriceDto
+                {
+                    ProductId = x.Id,
+                    UnitPrice = x.Price,
+                    Quantity = message.Products.FirstOrDefault(y => y.ProductId == x.Id)?.Quantity ?? default
+                })
             };
             await _kafkaMessageProducer.Produce(OrderStockUpdatedTopicName, orderStockUpdatedMessage.OrderId.ToString(),
                 orderStockUpdatedMessage);
