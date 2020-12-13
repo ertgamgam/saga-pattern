@@ -29,7 +29,7 @@ namespace Stock.Consumer.OrderCreated
 
         public async Task Handle(OrderCreatedMessage message)
         {
-            _logger.LogInformation($"Order created message received. Order Id = {message.Id}");
+            _logger.LogInformation($"OrderCreated message was received. Order Id = {message.Id}");
             var messageProducts = message.Products.ToList();
             var productIds = messageProducts.Select(x => x.ProductId).ToList();
             var dbProducts = await _dbContext.Products
@@ -40,10 +40,12 @@ namespace Stock.Consumer.OrderCreated
             {
                 await DecreaseStock(message, dbProducts);
                 await ProduceOrderStockUpdatedMessage(message, dbProducts);
+                _logger.LogInformation($"OrderStockUpdated message was sent. Order Id = {message.Id}");
             }
             else
             {
                 await ProduceOrderStockUpdateErrorMessage(message);
+                _logger.LogWarning($"OrderStockUpdateError message was sent. Order Id = {message.Id}");
             }
         }
 

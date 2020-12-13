@@ -20,7 +20,7 @@ namespace Stock.Consumer.OrderWalletPayError
 
         public async Task Handle(OrderWalletPayErrorMessage message)
         {
-            // _logger.LogInformation($"Order created message received. Order Id = {message.Id}");
+            _logger.LogWarning($"OrderWalletPayError message was received. Order Id = {message.OrderId}");
             var productIds = message.Products
                 .Select(x => x.ProductId)
                 .ToList();

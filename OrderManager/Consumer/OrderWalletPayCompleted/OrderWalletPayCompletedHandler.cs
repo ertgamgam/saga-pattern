@@ -20,9 +20,12 @@ namespace OrderManager.Consumer.OrderWalletPayCompleted
 
         public async Task Handle(OrderWalletPayCompletedMessage message)
         {
+            _logger.LogInformation($"OrderWalletPayComplete message was received. Order Id = {message.OrderId}");
             var order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.Id == message.OrderId);
             order.Status = OrderStatus.Created;
             await _dbContext.SaveChangesAsync();
+            _logger.LogInformation(
+                $"Order status was changed as {order.Status}. Order Id = {order.Id}");
         }
     }
 }

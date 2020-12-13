@@ -25,6 +25,7 @@ namespace Wallet.Consumer.OrderStockUpdated
 
         public async Task Handle(OrderStockUpdatedMessage message)
         {
+            _logger.LogInformation($"OrderStockUpdated message was received. Order Id = {message.OrderId}");
             var wallet = await _dbContext.Wallets.FirstOrDefaultAsync(x => x.UserId == message.UserId);
             var totalPrice = message.Products.Sum(x => x.Quantity * x.UnitPrice);
             if (wallet.Balance >= totalPrice)
@@ -33,6 +34,7 @@ namespace Wallet.Consumer.OrderStockUpdated
                 await _dbContext.SaveChangesAsync();
                 await _kafkaMessageProducer.Produce(OrderWalletPayCompletedTopicName, message.OrderId.ToString(),
                     new {message.OrderId});
+                _logger.LogInformation($"OrderWalletPayCompleted message was sent. Order Id = {message.OrderId}");
             }
             else
             {
@@ -46,6 +48,7 @@ namespace Wallet.Consumer.OrderStockUpdated
 
                 await _kafkaMessageProducer.Produce(OrderWalletPayErrorTopicName, message.OrderId.ToString(),
                     orderWalletPayErrorMessage);
+                _logger.LogWarning($"OrderWalletPayError message was sent. Order Id = {message.OrderId}");
             }
         }
     }

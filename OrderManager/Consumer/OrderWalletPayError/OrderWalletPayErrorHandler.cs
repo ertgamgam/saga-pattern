@@ -20,11 +20,13 @@ namespace OrderManager.Consumer.OrderWalletPayError
 
         public async Task Handle(OrderWalletPayErrorMessage message)
         {
-            // _logger.LogInformation($"Order created message received. Order Id = {message.Id}");
+            _logger.LogInformation($"OrderWalletPayError message was received. Order Id = {message.OrderId}");
             var order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.Id == message.OrderId);
             order.Status = OrderStatus.Failed;
             order.FailCause = message.WalletError;
             await _dbContext.SaveChangesAsync();
+            _logger.LogWarning(
+                $"Order status was changed as {order.Status}. FailCause = ${order.FailCause}. Order Id = {order.Id}");
         }
     }
 }

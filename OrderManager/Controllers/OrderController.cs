@@ -31,9 +31,11 @@ namespace OrderManager.Controllers
         {
             var entityEntry = await _dbContext.Orders.AddAsync(order);
             var savedOrder = entityEntry.Entity;
+            _logger.LogInformation($"Order accepted. Order Id = {savedOrder.Id}");
 
-            await _messageProducer.Produce(OrderCreatedTopicName, savedOrder.Id.ToString(), savedOrder);
             await _dbContext.SaveChangesAsync();
+            await _messageProducer.Produce(OrderCreatedTopicName, savedOrder.Id.ToString(), savedOrder);
+            _logger.LogInformation($"OrderCreated message was sent. Order Id = {savedOrder.Id}");
 
             Response.Headers.Add("Location", $"/orders/{savedOrder.Id}");
             return Accepted();
