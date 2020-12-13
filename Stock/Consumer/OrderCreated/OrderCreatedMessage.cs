@@ -7,13 +7,12 @@ namespace Stock.Consumer.OrderCreated
         public int Id { get; set; }
         public string Name { get; set; }
         public int UserId { get; set; }
-        public IEnumerable<ItemDto> Items { get; set; }
+        public IEnumerable<ProductDto> Products { get; set; }
     }
 
-    public class ItemDto
+    public class ProductDto
     {
-        public int ItemId { get; set; }
+        public int ProductId { get; set; }
         public int Quantity { get; set; }
-        public decimal Price { get; set; }
     }
 }

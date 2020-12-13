@@ -9,14 +9,13 @@ namespace OrderManager.Entity
         public string Name { get; set; }
         public int UserId { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.Accepted;
-        public IEnumerable<ItemDto> Items { get; set; }
+        public IEnumerable<ProductDto> Products { get; set; }
     }
 
-    public class ItemDto
+    public class ProductDto
     {
         [JsonIgnore] public int Id { get; set; }
-        public int ItemId { get; set; }
+        public int ProductId { get; set; }
         public int Quantity { get; set; }
-        public decimal Price { get; set; }
     }
 }
