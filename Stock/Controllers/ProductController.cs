@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Stock.Repository;
 
 namespace Stock.Controllers
@@ -19,7 +20,7 @@ namespace Stock.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var products = _dbContext.Products.ToList();
+            var products = await _dbContext.Products.ToListAsync();
             return Ok(new {Products = products});
         }
     }

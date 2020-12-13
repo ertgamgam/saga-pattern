@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock", "Stock\Stock.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaBroker", "KafkaBroker\KafkaBroker.csproj", "{99CD9DC0-57FA-4195-80EA-F27E5ADA01D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet", "Wallet\Wallet.csproj", "{8D742AC6-A4C9-4E04-83EE-FEDF96BCB555}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{99CD9DC0-57FA-4195-80EA-F27E5ADA01D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99CD9DC0-57FA-4195-80EA-F27E5ADA01D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99CD9DC0-57FA-4195-80EA-F27E5ADA01D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D742AC6-A4C9-4E04-83EE-FEDF96BCB555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D742AC6-A4C9-4E04-83EE-FEDF96BCB555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D742AC6-A4C9-4E04-83EE-FEDF96BCB555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D742AC6-A4C9-4E04-83EE-FEDF96BCB555}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
