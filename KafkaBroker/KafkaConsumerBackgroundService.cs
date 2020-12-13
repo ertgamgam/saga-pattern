@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace KafkaBroker
 {
-        public abstract class KafkaConsumerBackgroundService<THandler, TMessage> : BackgroundService
+    public abstract class KafkaConsumerBackgroundService<THandler, TMessage> : BackgroundService
         where THandler : IHandler<TMessage>
     {
         private readonly IConsumer<string, string> _consumer;
@@ -35,11 +35,11 @@ namespace KafkaBroker
 
         protected sealed override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            new Thread(() => StartConsumerLoop(stoppingToken)).Start();
+            new Thread(async () => await StartConsumerLoop(stoppingToken)).Start();
             return Task.CompletedTask;
         }
 
-        private void StartConsumerLoop(CancellationToken cancellationToken)
+        private async Task StartConsumerLoop(CancellationToken cancellationToken)
         {
             _consumer.Subscribe(_configuration.TopicName);
 
@@ -49,7 +49,7 @@ namespace KafkaBroker
                 {
                     var cr = _consumer.Consume(cancellationToken);
                     var deserialize = JsonSerializer.Deserialize<TMessage>(cr.Message.Value, _jsonSerializerOptions);
-                    _handler.Handle(deserialize);
+                    await _handler.Handle(deserialize);
                 }
                 catch (OperationCanceledException)
                 {
