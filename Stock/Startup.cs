@@ -6,14 +6,13 @@ namespace Stock
 {
     public class Startup
     {
-        
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddConsumers();
         }
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
         }
     }
 }

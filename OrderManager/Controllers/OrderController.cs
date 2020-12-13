@@ -41,7 +41,8 @@ namespace OrderManager.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var result = await _dbContext.Orders.FirstOrDefaultAsync(x => x.Id == id);
+            var result = await _dbContext.Orders.Include(x => x.Items)
+                .FirstOrDefaultAsync(x => x.Id == id);
             return result is null ? NotFound() : Ok(result) as IActionResult;
         }
     }

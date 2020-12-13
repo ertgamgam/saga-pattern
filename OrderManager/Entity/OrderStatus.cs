@@ -1,4 +1,4 @@
-namespace OrderManager
+namespace OrderManager.Entity
 {
     public enum OrderStatus
     {
