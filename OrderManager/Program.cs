@@ -16,7 +16,7 @@ namespace OrderManager
                 {
                     webBuilder.UseStartup<Startup>()
                         .UseKestrel()
-                        .UseUrls("http://*:8095");
+                        .UseUrls("http://*:8099");
                 });
     }
 }

@@ -9,6 +9,7 @@ namespace OrderManager.Entity
         public string Name { get; set; }
         public int UserId { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.Accepted;
+        public string FailCause { get; set; }
         public IEnumerable<ProductDto> Products { get; set; }
     }
 

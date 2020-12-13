@@ -45,8 +45,6 @@ namespace Stock.Consumer.OrderCreated
             {
                 await ProduceOrderStockUpdateErrorMessage(message);
             }
-
-            Console.WriteLine(message);
         }
 
         private async Task DecreaseStock(OrderCreatedMessage message, List<Product> dbProducts)
@@ -63,7 +61,7 @@ namespace Stock.Consumer.OrderCreated
 
         private async Task ProduceOrderStockUpdateErrorMessage(OrderCreatedMessage orderCreatedMessage)
         {
-            await _kafkaMessageProducer.Produce(OrderStockUpdatedTopicName, orderCreatedMessage.Id.ToString(),
+            await _kafkaMessageProducer.Produce(OrderStockUpdateErrorTopic, orderCreatedMessage.Id.ToString(),
                 new OrderStockUpdateErrorMessage
                 {
                     OrderId = orderCreatedMessage.Id,
