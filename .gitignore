@@ -37,3 +37,5 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 OrderManager/obj/Debug/netcoreapp3.1/OrderManager.csprojAssemblyReference.cache
+OrderManager/bin/Debug/netcoreapp3.1/OrderManager.pdb
+OrderManager/bin/Debug/netcoreapp3.1/OrderManager.dll

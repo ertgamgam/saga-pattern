@@ -28,7 +28,7 @@ namespace OrderManager.Consumer.OrderStockError
             order.FailCause = message.StockUpdateError;
             await _dbContext.SaveChangesAsync();
             _logger.LogWarning(
-                $"Order status was changed as {order.Status}. FailCause = ${order.FailCause}. Order Id = {order.Id}");
+                $"Order status was changed as {order.Status}. FailCause = {order.FailCause}. Order Id = {order.Id}");
         }
     }
 }
