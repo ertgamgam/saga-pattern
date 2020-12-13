@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
+using KafkaBroker;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OrderManager.Entity;
-using OrderManager.EventPublisher;
 using OrderManager.Repository;
 
 namespace OrderManager.Controllers
@@ -12,16 +12,18 @@ namespace OrderManager.Controllers
     [Route("orders")]
     public class OrderController : ControllerBase
     {
+        private const string OrderCreatedTopicName = "order-created";
+
         private readonly ILogger<OrderController> _logger;
         private readonly OrderDbContext _dbContext;
-        private readonly IOrderEventPublisher _orderEventPublisher;
+        private readonly IKafkaMessageProducer _messageProducer;
 
         public OrderController(ILogger<OrderController> logger, OrderDbContext dbContext,
-            IOrderEventPublisher orderEventPublisher)
+            IKafkaMessageProducer messageProducer)
         {
             _logger = logger;
             _dbContext = dbContext;
-            _orderEventPublisher = orderEventPublisher;
+            _messageProducer = messageProducer;
         }
 
         [HttpPost]
@@ -30,7 +32,7 @@ namespace OrderManager.Controllers
             var entityEntry = await _dbContext.Orders.AddAsync(order);
             var savedOrder = entityEntry.Entity;
 
-            await _orderEventPublisher.PublishOrderCreateEvent(savedOrder);
+            await _messageProducer.Produce(OrderCreatedTopicName, savedOrder.Id.ToString(), savedOrder);
             await _dbContext.SaveChangesAsync();
 
             Response.Headers.Add("Location", $"/orders/{savedOrder.Id}");

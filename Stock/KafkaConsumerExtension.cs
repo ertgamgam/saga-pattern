@@ -7,6 +7,9 @@ namespace Stock
 {
     public static class KafkaConsumerExtension
     {
+        private const string OrderCreatedTopicName = "order-created";
+        private const string GroupId = "stock-service";
+
         public static IServiceCollection AddConsumers(this IServiceCollection services)
         {
             services.AddSingleton<OrderCreatedHandler>();
@@ -14,13 +17,13 @@ namespace Stock
 
             var configuration = serviceProvider.GetRequiredService<IConfiguration>();
             var orderCreatedHandler = serviceProvider.GetRequiredService<OrderCreatedHandler>();
-            
+
             services.AddHostedService((provider => new OrderCreatedBackgroundService(
                 orderCreatedHandler, new KafkaConsumerConfiguration
                 {
                     KafkaHost = configuration.GetValue<string>("KafkaHost"),
-                    TopicName = "order-created",
-                    GroupId = "stock-service"
+                    TopicName = OrderCreatedTopicName,
+                    GroupId = GroupId
                 })));
 
             return services;

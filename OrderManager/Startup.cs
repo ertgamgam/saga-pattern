@@ -1,10 +1,10 @@
 using System.Text.Json.Serialization;
+using KafkaBroker;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OrderManager.EventPublisher;
 using OrderManager.Repository;
 
 
@@ -30,7 +30,12 @@ namespace OrderManager
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
 
-            services.AddSwaggerGen().AddSingleton<IOrderEventPublisher, OrderEventPublisher>();
+            services.AddSwaggerGen()
+                .AddSingleton<IKafkaMessageProducer, KafkaMessageProducer>(x =>
+                    new KafkaMessageProducer(new KafkaProducerConfiguration
+                    {
+                        KafkaHost = Configuration.GetValue<string>("KafkaHost"),
+                    }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
